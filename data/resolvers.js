@@ -16,15 +16,17 @@ const friendDatabase = {};
 let id = 0;
 const getId = () => id++;
 
-const resolvers = {
-    getFriend: ({ id }) => {
-        return new Friend(id, friendDatabase[id]);
+export const resolvers = {
+    Query: {
+        getFriend: ({ id }) => {
+            return new Friend(id, friendDatabase[id]);
+        },
     },
-    createFriend: ({ input }) => {
-      let id = getId();
-      friendDatabase[id] = input;
-      return new Friend(id, input);
+    Mutation: {
+        createFriend: ({ input }) => {
+            let id = getId();
+            friendDatabase[id] = input;
+            return new Friend(id, input);
+        },
     }
 };
-
-export default resolvers;
