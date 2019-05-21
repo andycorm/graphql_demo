@@ -1,12 +1,13 @@
 import mongoose from 'mongoose';
-import sequelize, { Sequelize } from 'sequelize';
+import Sequelize from 'sequelize';
 import _ from 'lodash';
 import casual from 'casual';
 
 // Mongo connection
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/friends', {
-    useMongoClient: true,
+ //   useMongoClient: true,
+ 
 });
 
 const friendSchema = new mongoose.Schema({
@@ -50,8 +51,8 @@ const Aliens = sequelize.define('aliens', {
 Aliens.sync({ force: true }).then(() => {
     _.times(10, i => {
         Aliens.create({
-            firstName: casual._first_name,
-            lastName: casual._last_name,
+            firstName: casual._first_name(),
+            lastName: casual._last_name(),
             planet: casual.word,
         });
     });
